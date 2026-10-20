@@ -1,10 +1,17 @@
-# Curtis Williams · CW2027
+# Curtis Williams · Portfolio redirect
 
 A lean, static portfolio for applied AI and systems work, with **19 real UI screenshots across five projects**, responsive carousels, an expanded gallery, and concise technical case studies.
 
-- **Website:** https://ce-williams.github.io/CW2027/
-- **Repository:** https://github.com/ce-williams/CW2027
+- **Website:** https://ce-williams.github.io/
+- **Main portfolio repository:** https://github.com/ce-williams/ce-williams.github.io
+- **Compatibility repository:** https://github.com/ce-williams/CW2027
 - No runtime dependencies, analytics, server, or accounts.
+
+## Publishing source
+
+The main website now deploys from the `master` branch of `ce-williams/ce-williams.github.io`. Make future portfolio changes there. This repository retains the earlier source and deploys only a redirect from `/CW2027/` to the root site. Existing query strings and section anchors are preserved when JavaScript is available.
+
+The local root-site checkout is `.publishing/root-site/` (ignored by this repository). Professional history and the downloadable CV are maintained in `data/experience.json` in that checkout.
 
 ## Run and publish
 
@@ -15,7 +22,7 @@ node scripts/preview.mjs
 
 Open http://127.0.0.1:4314. Set `PORT` to use another port.
 
-Push to `main` to deploy through `.github/workflows/pages.yml`. GitHub **Settings → Pages → Source** must be **GitHub Actions**. The workflow regenerates the HTML, packages only public files into `_site/`, and publishes that artifact. Capture sources, local databases, helper scripts, and provenance are excluded from the deployed artifact.
+Push to `main` to deploy the compatibility redirect through `.github/workflows/pages.yml`. GitHub **Settings → Pages → Source** must be **GitHub Actions**. The workflow regenerates the retained source but sets `PORTFOLIO_REDIRECT=true` when packaging, so only the redirect is published. Capture sources, local databases, helper scripts, and provenance are excluded from the deployed artifact.
 
 ## Update content
 

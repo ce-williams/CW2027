@@ -40,6 +40,7 @@ for (const root of document.querySelectorAll('.project-showcase')) {
   const dots=[...card.querySelectorAll('[data-slide]')];
   const state={card,track,slides,index:0};states.set(card.dataset.project,state);
   const update=()=>{
+   if(!track.clientWidth)return;
    const next=Math.max(0,Math.min(slides.length-1,Math.round(track.scrollLeft/track.clientWidth)));
    state.index=next;
    dots.forEach((dot,i)=>dot.setAttribute('aria-pressed',String(i===next)));

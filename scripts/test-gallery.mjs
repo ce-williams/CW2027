@@ -21,6 +21,13 @@ try {
  const card=page.locator('.ps-card').first();
  const track=card.locator('.ps-track');
  const index=()=>track.evaluate(el=>Math.round(el.scrollLeft/el.clientWidth));
+ await check('Professional experience, career disclosures and CV download work',async()=>{
+  assert.equal(await page.locator('.career-timeline .career-role').count(),4);
+  assert.match(await page.locator('.career-timeline').innerText(),/Fivetran/);
+  assert.match(await page.locator('.career-timeline').innerText(),/Transcarent/);
+  await page.locator('.career-earlier summary').click();assert.equal(await page.locator('.career-earlier .career-role:visible').count(),2);await page.locator('.career-earlier summary').click();
+  const cv=await page.request.get(new URL(await page.locator('.experience-actions a[download]').getAttribute('href'),url).href);assert.equal(cv.status(),200);assert.equal((await cv.body()).subarray(0,4).toString(),'%PDF');
+ })();
  await check('All 19 original screenshots load with descriptive alt text',async()=>{
   const imgs=page.locator('.ps-slide img');assert.equal(await imgs.count(),19);
   for(let i=0;i<await imgs.count();i++){const img=imgs.nth(i);assert((await img.getAttribute('alt')).length>25);const src=await img.getAttribute('src');const response=await page.request.get(new URL(src,url).href);assert.equal(response.status(),200);}

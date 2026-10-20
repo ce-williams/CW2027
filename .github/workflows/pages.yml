@@ -19,6 +19,8 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v6
       - name: Build portfolio
+        env:
+          PORTFOLIO_REDIRECT: "true"
         run: |
           node scripts/build-gallery.mjs
           node scripts/build-site.mjs
